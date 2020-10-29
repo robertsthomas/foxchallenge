@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Avatar,
   Box,
@@ -5,14 +6,46 @@ import {
   Card,
   Grid,
   Paper,
+  Slider,
   TextField,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { ToggleButton } from "@material-ui/lab";
 import DirectionsBoatTwoToneIcon from "@material-ui/icons/DirectionsBoatTwoTone";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 
+import "./index.css";
+
+const useStyles = makeStyles({
+  buttonLabel: {
+    justifyContent: "space-evenly",
+  },
+  thumb: {
+    height: 28,
+    width: 28,
+    marginTop: -12,
+    marginLeft: -16,
+    border: "4px solid lightgrey",
+  },
+  track: {
+    color: "#5E00FF",
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+});
+
 function App() {
+  const classes = useStyles();
+  const [sliderValue, setSliderValue] = useState(180);
+
+  const handleSliderChange = (event, newValue) => {
+    setSliderValue(newValue);
+  };
   const CreditCardSVG = () => {
     return (
       <Box>
@@ -44,7 +77,6 @@ function App() {
       <Card
         raised
         style={{
-          height: "90vh",
           padding: 30,
           margin: 20,
           borderRadius: 10,
@@ -52,21 +84,20 @@ function App() {
       >
         <Grid container style={{ width: "90%", margin: "0 auto" }}>
           <Grid item>
-            <Typography gutterBottom variant="h5" style={{ fontWeight: 800 }}>
+            <Box style={{ fontWeight: 800, fontSize: 24 }}>
               Upgrade your plan
-            </Typography>
-            <Typography
-              gutterBottom
+            </Box>
+            <Box
               style={{
                 width: "90%",
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: "light",
                 color: "grey",
               }}
             >
               Please make the payment to start enjoying all the features of our
               premium plan as soon as possible.
-            </Typography>
+            </Box>
           </Grid>
           {/* Small Busineess Button */}
           <Grid item style={{ width: "100%" }}>
@@ -145,7 +176,7 @@ function App() {
                       </span>
                     </span>
                     <small
-                      style={{ color: "grey", fontWeight: "100", fontSize: 16 }}
+                      style={{ color: "grey", fontWeight: "100", fontSize: 20 }}
                     >
                       {" "}
                       / year
@@ -160,7 +191,7 @@ function App() {
 
           {/* Payment Details Section */}
           <Grid item container>
-            <Box my={1} fontWeight="bold" fontSize={20} mb={3}>
+            <Box my={1} fontWeight="bold" fontSize={25} mb={3}>
               Payment details
             </Box>
             {/* Credit Cards */}
@@ -183,8 +214,9 @@ function App() {
                   <Box color="text.secondary">2344 xxxx xxxx 8880</Box>
                 </Box>
                 <div></div>
-                <Box>
+                <Box width="130%">
                   <TextField
+                    fullWidth
                     id="standard-number"
                     placeholder="CVC"
                     type="number"
@@ -213,8 +245,9 @@ function App() {
                   <Box color="text.secondary">2344 xxxx xxxx 8880</Box>
                 </Box>
                 <div></div>
-                <Box>
+                <Box width="130%">
                   <TextField
+                    fullWidth
                     id="standard-number"
                     placeholder="CVC"
                     type="number"
@@ -228,7 +261,7 @@ function App() {
             <Box
               my={3}
               fontWeight="bold"
-              color="info.main"
+              color="#7535FF"
               fontSize={20}
               width="100%"
               letterSpacing={2}
@@ -244,7 +277,7 @@ function App() {
                 fullWidth
               />
             </Box>
-            <Box my={3} width="100%" bgcolor="info.main">
+            <Box my={3} width="100%" bgcolor="#5E00FF">
               <Button
                 size="large"
                 variant="contained"
@@ -325,9 +358,10 @@ function App() {
                 style={{
                   borderRadius: 50,
                   background: "#5E00FF",
-                  width: "35%",
+                  width: "30%",
                   color: "white",
                   margin: "20px auto 40px",
+                  padding: "10px 0",
                   fontWeight: "bold",
                   fontSize: 14,
                 }}
@@ -374,8 +408,138 @@ function App() {
             </Box>
           </Box>
         </Card>
+        {/* Profile 2 */}
         <Card raised style={{ height: "100%", borderRadius: 10 }}>
-          bottom
+          {/* Price Select */}
+          <Grid container display="flex" style={{ padding: 30 }}>
+            <Grid item xs={12}>
+              <Box fontWeight="bold" fontSize={24} my={1}>
+                Set up your pricing
+              </Box>
+            </Grid>
+            <Box fontSize={16} color="grey" my={1}>
+              Please set up your hourly or fixed rate so that the client is
+              aware of your pricing.
+            </Box>
+          </Grid>
+          {/* Price Select Buttons */}
+          <Grid container xs={12} justify="space-around">
+            <Box width="40%">
+              {/* Hourly Button */}
+              <ToggleButton
+                fullWidth
+                variant="outlined"
+                color="primary"
+                style={{
+                  padding: 20,
+                  width: "100%",
+                  background: "#F2F2FF",
+                  border: "2px solid #C1B6FF",
+                }}
+                classes={{
+                  root: classes.buttonLabel,
+                }}
+                selected={true}
+              >
+                <svg
+                  width="2em"
+                  height="2em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-clock-history"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
+                  />
+                </svg>
+                <Box fontWeight="bold">Hourly</Box>
+              </ToggleButton>
+            </Box>
+            <Box width="40%">
+              {/* Fixed Button */}
+              <ToggleButton
+                fullWidth
+                variant="outlined"
+                color="primary"
+                style={{ padding: 20, width: "100%" }}
+                classes={{
+                  root: classes.buttonLabel,
+                }}
+              >
+                <svg
+                  width="2em"
+                  height="2em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-file-earmark-check"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                  <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                  />
+                </svg>
+                <Box fontWeight="bold">Fixed</Box>
+              </ToggleButton>
+            </Box>
+          </Grid>
+          {/* End Price Select Buttons */}
+          <Box display="flex" width="100%" px={5} py={3} position="relative">
+            <Box fontWeight="400" fontSize={35}>
+              {sliderValue}
+              <span
+                style={{ fontSize: 16, fontWeight: "normal", color: "grey" }}
+              >
+                {" "}
+                /year
+              </span>
+            </Box>
+            <Box
+              position="absolute"
+              top={30}
+              left={30}
+              fontWeight="normal"
+              color="text.secondary"
+            >
+              $
+            </Box>
+          </Box>
+          <Box width="85%" mx="auto">
+            <Slider
+              value={sliderValue}
+              onChange={handleSliderChange}
+              classes={{
+                thumb: classes.thumb,
+                track: classes.track,
+                rail: classes.rail,
+              }}
+              min={20}
+              max={200}
+              marks={[
+                {
+                  value: 20,
+                  label: "$20",
+                },
+                {
+                  value: 200,
+                  label: "$200",
+                },
+              ]}
+              aria-labelledby="continuous-slider"
+            />
+          </Box>
         </Card>
       </div>
     </div>
