@@ -71,7 +71,7 @@ function App() {
       style={{
         display: "grid",
         gap: 50,
-        gridTemplateColumns: "2fr 1fr",
+        gridTemplateColumns: "1.5fr 1fr",
       }}
     >
       <Card
